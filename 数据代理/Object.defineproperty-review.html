@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>回顾Object.defineproperty方法</title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <script type="text/javascript">
+            let number = 18
+            let person = {
+                name: 'Reindorius',
+                gender: 'Male',
+            }
+
+            Object.defineProperty(person, 'age', {
+                // value: 25,
+                // enumerable: true,//加入这一行就可以被枚举了，默认是false
+                // writable: true, //是否可以被修改
+                // configurable: true, //是否可以被删除
+                
+                //当有人读取到person的age属性时候，get就会被调用，并返回age的值 
+                get:function(){
+                    console.log('Age is being accessed')
+                    return number
+                },
+
+                set(value){//同OOP中的setter，当有人修改age的时候就会被调用, 而且会收到修改的具体值
+                    console.log('Age is being modified: ', value)
+                    number = value
+                }
+            })//如果我们用这种方法加入一个age字段，那么这个age是not enumerable的，不参与枚举，不能遍历
+
+            console.log(person)
+            console.log(Object.keys(person))
+        </script>
+    </body>
+    
+</html>

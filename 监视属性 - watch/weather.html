@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h1>The weather today is {{hotness}}</h1>
+            <button @click="toggleHotness">Switch Weather</button>
+        </div>
+
+        <script type="text/javascript">
+            const vm = new Vue({
+                el: '#root',
+                data: {
+                    temperature: true
+                },
+                methods: {
+                    toggleHotness(){
+                        this.temperature = !this.temperature
+                    }
+                },
+                computed: {
+                    hotness: {
+                        get(){
+                            if (this.temperature) return 'hot'
+                            return 'cold'
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

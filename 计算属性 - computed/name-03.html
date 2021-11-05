@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>姓名案例 methods实现</title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            Last Name: <input type="text" v-model="lastname"> <br>
+            First Name: <input type="text" v-model="firstname"> <br>
+            Full Name: <span>{{fullname}}</span>
+
+        </div>
+
+        <script type="text/javascript">
+            //计算属性：用已经写好的属性进行加工计算，生成全新的属性
+            const vm = new Vue({
+                el: '#root',
+                data: {
+                    lastname: 'Sapientiam',
+                    firstname: 'Reindorius',
+                },
+                computed: {
+                    fullname: {
+                        /**
+                         * get调用的时机：
+                         * 1. 初次读取的时候
+                         * 2. 所依赖的数据发生变化的时候（这里指firstname和lastname）
+                         * */
+                        get(){ //这里的get并不能当做函数调用，所以写fullname.get()是会报错的
+                            // console.log('getter is called')
+                            return this.firstname + ' ' + this.lastname
+                        },
+                        set(value){
+                            console.log('value - ', value)
+                            const arr = value.split(' ')
+                            this.firstname = arr[1]
+                            this.lastname = arr[0]
+                        }
+                        
+                    }
+                }
+            })
+        </script>
+    </body>
+
+    
+</html>

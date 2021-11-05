@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>data binding</title>
+        <script type="text/javascript" src="../vue-src/vue.js">
+        /*
+            1. k
+        */
+        </script>
+    </head>
+
+    <body>
+        <div id="root">
+            单向数据绑定: 
+            <input type="text" v-bind:value="name">
+            双向数据绑定:
+            <input type="text" v-model:value="name">
+            <h2 v-bind:x="name">{{name}}</h2>
+            <!-- 
+                <h2 v-model="name">: v-model is not supported on this element type. 
+                If you are working with contenteditable, it's recommended to wrap a library dedicated for that purpose inside a custom component. 
+            -->
+            <!-- v-model 只能用在表单类/输入类元素上，即包含value的元素上 -->
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        const v = new Vue({
+            // el: '#root',//el第一种写法: 预先设置好el
+            // data:{//data的第一种写法：对象式
+            //     name: 'Reindorius'
+            // }
+
+            //data的第二种学法：函数式，这个函数必须返回一个对象
+            data:function(){
+                console.log(this)//这个this是当前的VUE示例，如果函数写成了()=>形式，这里的this就指的是全局的window了
+                return {
+                    name: 'Reindorius'
+                }
+                //或者
+                /*
+                    return{
+                        ...
+                    }
+                */
+            }
+        })
+
+        // console.log(v)
+        v.$mount('#root')//el第二种写法：随后设置el
+    </script>
+</html>

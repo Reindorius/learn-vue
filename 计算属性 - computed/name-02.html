@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>姓名案例 methods实现</title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            Last Name: <input type="text" v-model="lastname"> <br>
+            First Name: <input type="text" v-model="firstname"> <br>
+            Full Name: <span>{{fullname()}}</span>
+            <!-- 和事件不一样，函数如果要作为插值必须要加括号 -->
+
+        </div>
+
+        <script type="text/javascript">
+            const vm = new Vue({
+                el: '#root',
+                data: {
+                    lastname: 'Sapientiam',
+                    firstname: 'Reindorius',
+                },
+                methods:{
+                    fullname(){
+                        return this.firstname + ' ' + this.lastname
+                        /**
+                            this 指向当前的vue示例
+                            当this的data发生变化的时候，vue模板都会重新解析一次。又因为这里的数据绑定用的是v-model，
+                            所以当输入框里面的文字发生改变的时候，full name处打印的全名也会发生变化。函数也会重新调用
+                        */
+                    }
+                }
+            })
+        </script>
+    </body>
+
+    
+</html>

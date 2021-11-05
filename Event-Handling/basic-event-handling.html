@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>基本事件处理</title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h1>Welcome to {{name}}</h1>
+            <button v-on:click="showInfo">Click for prompt</button>
+            <button @click="showInfo2(10, $event)">Click of something else</button>
+        </div>
+
+        <script type="text/javascript">
+
+            const vm = new Vue({
+                el: '#root',
+                data:{
+                    name: 'Reindorius',
+                },
+                methods: {
+                    //函数没有数据代理
+                    showInfo(event){//这种受到Vue管理的函数需要一概写成普通的形式，避免()=>，否则this会指向window对象
+                        alert('Hello')
+                    },
+                    showInfo2(number, event){
+                        alert(number + event)
+                    }
+                }
+            })
+        </script>
+    </body>
+
+    
+</html>

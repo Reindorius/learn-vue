@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>数据代理</title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <!-- 数据代理： 通过一个对象代理对另一个对象中属性的操作 -->
+        <script type="text/javascript">
+            let obj = {x:100}
+            let obj2 = {y:200}
+
+            //注意obj2里面原先并没有x这个属性
+            Object.defineProperty(obj2, 'x', {
+                get(){
+                    console.log('Accessing element \"x\" of obj')
+                    return obj.x
+                },
+
+                set(value){
+                    console.log("element \'x\' of obj has been modified")
+                    obj.x = value
+                }
+            })
+        </script>
+    </body>
+
+    <script type="text/javascript"></script>
+</html>

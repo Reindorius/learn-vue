@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>begin vue</title>
+        <script type="text/javascript" src="../vue-src/vue.js">
+        </script>
+    </head>
+
+    <body>
+        <!-- 准备容器 -->
+        <div id="root">
+            <h1>Hello, {{name}} | address: {{address}}</h1>
+            <h2>{{Date.now()}}</h2>
+            <a v-bind:href="url" :x="hello">{{info.url.toLowerCase()}}</a>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+
+            //Vue obj
+            //容器和vue对象“只能”是一对一的关系，但一个vue对象可以有无数个“手下”(组件)
+            const x = new Vue({
+                el: '#root', //el就是元素, 指定当前Vue对象为哪些容器服务
+                data: { //data用来存储数据，供el指定的容器使用
+                    name: 'Reindorius Sapientiam',
+                    address: '2205 Lower Mall',
+                    url: 'https://bbs.nga.cn/thread.php?fid=564',
+                    hello: 'greeting',
+                    info: 
+                    {
+                        url: 'URL'
+                    }
+                }
+            })
+
+            
+        </script>
+    </body>
+</html>

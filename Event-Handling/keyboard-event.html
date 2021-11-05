@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h1>{{name}}</h1>
+            <input type="text" placeholder="Press Enter for prompt" @keydown.ctrl="showInfo">
+            <!-- 
+                keyup: 按下松手后触发
+                keydown: 按下即触发
+
+                tab: 这个按键比较特殊，本身有一个切换当前元素焦点的功能，且tab按下的瞬间焦点就已经切换了。所以tab要搭配keydown使用
+
+                系统修饰键：ctrl, alt, shift, meta(windows下是win键，MACOS是command)
+                1. 配合keyup使用：按下修饰键的同时按下其他键，随后释放其他键，事件才触发
+                2. 配合keydown使用：按下即触发
+             -->
+        </div>
+
+        <script type="text/javascript">
+            const vm = new Vue({
+                el: '#root',
+                data: {
+                    name: 'Reindorius'
+                },
+                methods: {
+                    showInfo(event){
+                        console.log(event.target.value)
+                    }
+                    
+                }
+            })
+        </script>
+    </body>
+
+    
+</html>
