@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script type="text/javascript" src="../vue-src/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h1>The weather today is {{hotness}}</h1>
+            <button @click="toggleHotness">Switch Weather</button>
+        </div>
+
+        <script type="text/javascript">
+            const vm = new Vue({
+                el: '#root',
+                data: {
+                    temperature: true
+                },
+                methods: {
+                    toggleHotness(){
+                        this.temperature = !this.temperature
+                    }
+                },
+                computed: {
+                    hotness: {
+                        get(){
+                            if (this.temperature) return 'hot'
+                            return 'cold'
+                        }
+                    }
+                },
+                watch: {
+                    //写配置对象，一般用于创建vue对象时候明确知道需要监测的对象的场合
+                    temperature: {
+                        handler(newValue, oldValue){
+                            //当当前配置对象发生变化时调用
+                            console.log('Temperature is modified', oldValue, newValue)
+                        },
+                        immediate: true//默认是false。如果是true，初始化时让handler调用一下
+                    }
+                }
+            })
+            
+            //可以通过创建的vue示例来监视，用于不清楚具体监视对象的时候
+            vm.$watch('temperature', {
+                        handler(newValue, oldValue){
+                            //当当前配置对象发生变化时调用
+                            console.log('Temperature is modified', oldValue, newValue)
+                        },
+                        immediate: true//默认是false。如果是true，初始化时让handler调用一下
+                    })
+        </script>
+    </body>
+</html>
