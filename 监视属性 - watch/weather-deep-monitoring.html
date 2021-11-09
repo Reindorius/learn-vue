@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Monitoring</title>
+    <script type="text/javascript" src="../vue-src/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h1>The weather today is {{hotness}}</h1>
+    <button @click="toggleHotness">Switch Weather</button> <hr/>
+    <h3>Value of a: {{numbers.a}}</h3>
+    <button @click="numbers.a++">Click to add</button>
+    <h3>Value of b: {{numbers.b}}</h3>
+    <button @click="numbers.b++">Click to add</button>
+    <button @click="numbers = {a: 114, b: 514}">Assign new values</button>
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            temperature: true,
+            numbers: {
+                a: 1,
+                b: 2
+            }
+        },
+        methods: {
+            toggleHotness(){
+                this.temperature = !this.temperature
+            }
+        },
+        computed: {
+            hotness: {
+                get(){
+                    if (this.temperature) return 'hot'
+                    return 'cold'
+                }
+            }
+        },
+        watch: {
+            //写配置对象，一般用于创建vue对象时候明确知道需要监测的对象的场合
+            temperature: {
+                handler(newValue, oldValue){
+                    //当当前配置对象发生变化时调用
+                    console.log('Temperature is modified', oldValue, newValue)
+                },
+                immediate: true//默认是false。如果是true，初始化时让handler调用一下
+            },
+            'numbers': {//加引号才是最原始的表达方式，注意写'this.numbers.a'也是不行的
+                deep: true, //vue虽然默认可以检测到多层级数据的改变，比如numbers.a，但是在watch中是默认不行的，这里将deep设置为true开启深层监视
+                handler(){
+                    console.log('numbers is changed: ' + this.numbers.toString())
+                }
+            }
+        }
+    })
+
+    //可以通过创建的vue示例来监视，用于不清楚具体监视对象的时候
+    vm.$watch('temperature', {
+        handler(newValue, oldValue){
+            //当当前配置对象发生变化时调用
+            console.log('Temperature is modified', oldValue, newValue)
+        },
+        immediate: true//默认是false。如果是true，初始化时让handler调用一下
+    })
+</script>
+</body>
+</html>

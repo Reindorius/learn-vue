@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compare Watch and Computed</title>
+    <script type="text/javascript" src="../vue-src/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    Firstname: <input type="text" v-model="firstname"> <br/><br/>
+    Lastname: <input type="text" v-model="lastname"> <br/><br/>
+    Fullname: <span>{{fullname}}</span>
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            firstname: 'Reindorius',
+            lastname: 'Sapientiam',
+            fullname: 'Reindorius Sapientiam',
+        },
+        methods: {
+            //
+        },
+        computed: {
+            //
+        },
+        watch: {
+            firstname(val){
+                setTimeout(()=>{
+                    this.fullname = val + ' ' + this.lastname
+                })
+            },
+            lastname: {
+                immediate: true,
+                handler(newValue) {
+                    console.log('Before: ' + this.fullname)
+                    this.fullname = this.firstname + ' ' + newValue
+                    console.log('After: ' + this.fullname)
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
