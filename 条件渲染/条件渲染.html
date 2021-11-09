@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>条件渲染</title>
+    <script type="text/javascript" src="../vue-src/vue.js"></script>
+</head>
+
+<body>
+<div id="root">
+    <h1 v-show="false || n % 2 === 0">Welcome to {{address}}</h1>
+    <h1 v-if="false || n % 3 === 0">{{name}}</h1>
+    <div>Current value of n: {{n}}</div>
+
+    <template v-if="n % 5 === 0">
+        <h2>I</h2>
+        <h2>am</h2>
+        <h2>ironman</h2>
+    </template>
+
+    <button @click="n++">Click me to add 1 to n</button>
+
+
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: 'Reindorius',
+            address: 'Arboretum',
+            n: 0
+        }
+    })
+</script>
+</body>
+
+
+</html>

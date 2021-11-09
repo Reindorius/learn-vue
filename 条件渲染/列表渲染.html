@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>列表渲染</title>
+  <script type="text/javascript" src="../vue-src/vue.js"></script>
+</head>
+
+<body>
+<div id="root">
+  <ul>
+    <!--  遍历一个列表  -->
+    <li v-for="(person, index) in people" :key="person.id">{{index + 1}} --- Name: {{person.name}}
+    --- Age: {{person.age}}</li>
+  </ul>
+  <ul>
+    <!--  遍历一个对象中的元素  -->
+    <li v-for="(a, b) of vehicle">{{b[0].toUpperCase() + b.substring(1)}} ---- {{a}}</li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      people: [//an array of object
+        {id: 1, name: 'Reindorius Sapientiam', age: 25},
+        {id: 2, name: 'Tabula Rasa', age: 17},
+        {id: 3, name: 'Asp Dotnet', age: 30},
+      ],
+      vehicle: {
+        name: 'T-80U',
+        price: '3000000 USD',
+        manufacturer: 'Malyshev Factory, Ukraine',
+        'main armament': '125mm 2A46-2 smoothebore gun',
+
+      }
+    }
+  })
+</script>
+</body>
+
+
+</html>
